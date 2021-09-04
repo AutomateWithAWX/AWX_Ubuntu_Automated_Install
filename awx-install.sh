@@ -26,9 +26,9 @@ wget https://github.com/ansible/awx/archive/15.0.0.zip
 unzip -o 15.0.0.zip
 touch ~/awxsecret
 cd awx-15.0.0/installer/
-$awxsecret='pwgen -N 1 -s 30'
+#$awxsecret='pwgen -N 1 -s 30'
 sed -i 's/# admin_password=password/admin_password=password/' ./inventory
-sed -i 's/secret_key=awxsecret/secret_key=$awxsecret/' ./inventory
+#sed -i 's/secret_key=awxsecret/secret_key=$awxsecret/' ./inventory
 ansible-playbook -i inventory install.yml
 sudo systemctl restart docker
 x-www-browser 'http://localhost'
