@@ -24,11 +24,9 @@ sudo apt install -y python3-pip git pwgen
 sudo pip3 install docker-compose==1.28.5
 wget https://github.com/ansible/awx/archive/15.0.0.zip
 unzip -o 15.0.0.zip
-touch ~/awxsecret
 cd awx-15.0.0/installer/
-#$awxsecret='pwgen -N 1 -s 30'
-sed -i 's/# admin_password=password/admin_password=password/' ./inventory
-#sed -i 's/secret_key=awxsecret/secret_key=$awxsecret/' ./inventory
+sudo rm ./inventory
+curl -s https://raw.githubusercontent.com/AutomateWithAWX/AWX_Ubuntu_Automated_Install/main/files/inventory -o $PWD/inventory
 ansible-playbook -i inventory install.yml
 sudo systemctl restart docker
 x-www-browser 'http://localhost'
